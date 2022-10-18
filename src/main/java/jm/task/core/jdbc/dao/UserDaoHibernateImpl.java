@@ -25,9 +25,9 @@ public class UserDaoHibernateImpl implements UserDao {
                     " age INTEGER(3) not NULL, " +
                     " PRIMARY KEY (id))").addEntity(User.class).executeUpdate();
             transaction.commit();
-            System.out.println("Таблица User успешно создана.");
+            //System.out.println("Таблица User успешно создана.");
         }catch (HibernateException he){
-            System.out.println("Ошибка создания таблицы User.");
+            //System.out.println("Ошибка создания таблицы User.");
             if(transaction != null){
                 System.out.println("Откат транзакции.");
                 transaction.rollback();
@@ -42,9 +42,7 @@ public class UserDaoHibernateImpl implements UserDao {
             transaction = session.beginTransaction();
             session.createSQLQuery("DROP TABLE IF EXISTS user").executeUpdate();
             transaction.commit();
-            System.out.println("Таблица User успешно удалена.");
         }catch (HibernateException eh){
-            System.out.println("Ошибка удаления таблицы.");
             if(transaction != null){
                 System.out.println("Откат транзакции.");
                 transaction.rollback();
@@ -60,9 +58,7 @@ public class UserDaoHibernateImpl implements UserDao {
             User user = new User(name, lastName, age);
             session.save(user);
             transaction.commit();
-            System.out.println("Пользователь " + user.getName() + " успешно добавлен");
         }catch (HibernateException eh){
-            System.out.println("Ошибка добавления пользователя");
             if(transaction != null){
                 System.out.println("Откат транзакции.");
                 transaction.rollback();
@@ -77,9 +73,7 @@ public class UserDaoHibernateImpl implements UserDao {
             transaction = session.beginTransaction();
             session.delete(String.valueOf(id), session.load(User.class, id));
             transaction.commit();
-            System.out.println("Пользователь с id = " + id + " удалён.");
         }catch (HibernateException eh){
-            System.out.println("Ошибка удаления по id");
             if(transaction != null){
                 System.out.println("Откат транзакции.");
                 transaction.rollback();
@@ -95,9 +89,7 @@ public class UserDaoHibernateImpl implements UserDao {
             transaction = session.beginTransaction();
             userList = session.createQuery("from User").getResultList();
             transaction.commit();
-            System.out.println("Список пользователей успешно получен.");
         }catch (HibernateException eh){
-            System.out.println("Ошибка получения списка пользователей");
             if(transaction != null){
                 System.out.println("Откат транзакции.");
                 transaction.rollback();
@@ -113,9 +105,7 @@ public class UserDaoHibernateImpl implements UserDao {
             transaction = session.beginTransaction();
             session.createSQLQuery("TRUNCATE TABLE user").executeUpdate();
             transaction.commit();
-            System.out.println("Таблица успешно очищена.");
         }catch (HibernateException eh){
-            System.out.println("Ошибка очистки таблицы.");
             if(transaction != null){
                 System.out.println("Откат транзакции.");
                 transaction.rollback();
