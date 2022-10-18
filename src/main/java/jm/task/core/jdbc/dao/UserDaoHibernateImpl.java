@@ -12,7 +12,6 @@ public class UserDaoHibernateImpl implements UserDao {
     public UserDaoHibernateImpl() {
     }
 
-
     @Override
     public void createUsersTable() {
         Transaction transaction = null;
@@ -25,9 +24,7 @@ public class UserDaoHibernateImpl implements UserDao {
                     " age INTEGER(3) not NULL, " +
                     " PRIMARY KEY (id))").addEntity(User.class).executeUpdate();
             transaction.commit();
-            //System.out.println("Таблица User успешно создана.");
         }catch (HibernateException he){
-            //System.out.println("Ошибка создания таблицы User.");
             if(transaction != null){
                 System.out.println("Откат транзакции.");
                 transaction.rollback();
